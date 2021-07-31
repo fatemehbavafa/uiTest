@@ -14,16 +14,16 @@ class Tag extends Model
 
     public function testers()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'tag_user');
     }
 
     public function websites()
     {
-        return $this->belongsToMany(Website::class);
+        return $this->belongsToMany(Website::class,'tag_website');
     }
 
     public function questions()
     {
-        return $this->belongsToMany(Question::class);
+        return $this->belongsToMany(Question::class,'question_tag');
     }
 }

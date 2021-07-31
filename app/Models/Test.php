@@ -9,6 +9,16 @@ class Test extends Model
 {
     use HasFactory;
     protected $table='tests';
-    protected $fillable=['tester_id','website_id','question_id','answer','result'];
+    protected $fillable=['website_id','result'];
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class,'question_test');
+    }
+
+    public function testers()
+    {
+        $this->belongsToMany(User::class,'test_tester');
+    }
 
 }

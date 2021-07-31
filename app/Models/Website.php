@@ -14,7 +14,7 @@ class Website extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class,'tag_website');
     }
 
     public function employer()

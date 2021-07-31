@@ -13,7 +13,12 @@ class Question extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class,'question_tag');
+    }
+
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class,'question_test');
     }
 
 }

@@ -40,16 +40,21 @@ class User extends Authenticatable
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class,'tag_user');
     }
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class,'role_user');
     }
 
     public function websites()
     {
         return $this->hasMany(Website::class);
+    }
+
+    public function tests()
+    {
+        $this->belongsToMany(Test::class,'test_tester');
     }
 }
