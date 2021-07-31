@@ -1,0 +1,85 @@
+#gbox_grid div, #gbox_grid span{
+    font-family: "iransans", Helvetica Neue, Helvetica, Arial, sans-serif !important;
+    font-size: 13px;
+}
+#gridContainer table{
+    width: auto !important;
+}
+input.editable, input.ui-widget-content{
+    background-color: #fff !important;
+    border: 1px solid #ddd !important;
+    margin: 5px 0 !important;
+    font-family: "iransans", Helvetica Neue, Helvetica, Arial, sans-serif !important;
+    font-size: 13px !important;
+    line-height: 13px !important;;
+    padding: 5px 5px !important;
+}
+.ui-jqgrid-hbox-rtl, #grid tr{
+    box-sizing: border-box;
+}
+
+#pager2, #gview_grid, #gbox_grid, .ui-jqgrid-hdiv, .ui-jqgrid-bdiv{
+    width: 100% !important;
+}
+table#grid td{
+    font-family: "iransans", Helvetica Neue, Helvetica, Arial, sans-serif !important;
+    font-size: 13px;
+	line-height: 40px;
+	box-shadow: none !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+#grid tr{
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+table.ui-search-table .ui-search-input {
+   padding: 0 7px 8px !important;
+}
+table.ui-search-table select{
+    font-family: "iransans", Helvetica Neue, Helvetica, Arial, sans-serif !important;
+}
+#pg_pager2 table{
+	direction: ltr !important;
+}
+.ui-jqgrid .ui-jqgrid-title{
+    float: right !important;
+    margin: 0.6em 1em 0 !important;
+    color: #0a001f;
+}
+.ui-jqgrid .ui-jqgrid-pager{
+    height: auto !important;
+}
+table.ui-search-table input[type=text]{
+    width: 85%;
+    margin: 0 !important;
+}
+.ui-jqgrid .ui-jqgrid-htable th div{
+    height: auto !important;
+}
+table#grid td{
+    text-align: center;
+    color: inherit;
+    background-color: #ffffff;
+    background-image: none;
+    border: none;    
+}
+
+#gridContainer{
+    margin: auto;
+}
+
+span.actionWrapper *{
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    line-height: 0 !important;
+}
+span.actionWrapper{
+    white-space: nowrap;
+}
+.content{
+    width: 100% !important;
+    padding: 0 !important;
+}

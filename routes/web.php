@@ -15,14 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $field=\App\Models\Field::find(1);
-    dd($field->users);
     return view('welcome');
 });
 
 //Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('website',\App\Http\Controllers\WebsiteController::class);
-Route::resource('user',\App\Http\Controllers\UserController::class);
-Route::resource('question',\App\Http\Controllers\QuestionController::class);
+Route::resource('website', \App\Http\Controllers\WebsiteController::class);
+Route::resource('user', \App\Http\Controllers\UserController::class);
+Route::resource('question', \App\Http\Controllers\QuestionController::class);
 
