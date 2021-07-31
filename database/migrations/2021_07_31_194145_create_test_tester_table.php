@@ -18,7 +18,7 @@ class CreateTestTesterTable extends Migration
             $table->unsignedBigInteger('test_id');
             $table->foreign('test_id')->references('id')->on('tests');
             $table->unsignedBigInteger('tester_id');
-            $table->foreign('tester_id')->references('id')->on('tester_id');
+            $table->foreign('tester_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
