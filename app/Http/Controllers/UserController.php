@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    private $useres;
+
     public function testers()
     {
 
@@ -16,9 +19,16 @@ class UserController extends Controller
 
     }
 
+    public function __construct()
+    {
+        $this->useres = User::all();
+
+    }
+
     public function index()
     {
-
+        $useres = $this->useres;
+        return view('user.index', compact('useres'));
     }
 
     /**
@@ -28,7 +38,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $useres = $this->useres;
+        return view('user.create', compact('useres'));
     }
 
     /**
