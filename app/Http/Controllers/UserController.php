@@ -50,7 +50,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($request->all());
+        return redirect(route('user.index'))->with('message', 'کاربر انجام  شد  ');
     }
 
     /**
@@ -61,7 +62,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('user.show');
     }
 
     /**
@@ -72,7 +73,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user= User::findOrFail($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -84,8 +86,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return redirect(route('user.index'))->with('message', ';کاربر با موفقیت ویرایش شد');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -95,6 +101,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect(route('user.index'))->with('message', ';کاربر با موفقیت ویرایش شد');
     }
 }
