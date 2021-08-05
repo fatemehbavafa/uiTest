@@ -10,11 +10,12 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <h1>کاربران </h1>
+            <h1>ویرایش سوال </h1>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{route('user.index')}}">فهرست</a></li>
-                    <li class="breadcrumb-item active">جدید</li>
+                    <li class="breadcrumb-item"><a href="{{route('question.index')}}">فهرست</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('question.create')}}">جدید</a></li>
+
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -24,8 +25,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    {{Form::open(array('route'=>'user.store','method' => 'POST'))}}
-                    @include('user.form')
+                    {{Form::model($question, ['route' => ['question.update', $question->id], 'class'=> 'form-horizontal text-right', 'method' => 'PATCH' ])}}
+                    @include('question.form')
                     {{Form::close()}}
                 </div>
             </div>
@@ -38,4 +39,5 @@
     <script src="{{asset('DoreJs/js/vendor/bootstrap-tagsinput.min.js')}}"></script>
     <script src="{{asset('DoreJs/js/vendor/cropper.min.js')}}"></script>
     <script src="{{asset('DoreJs/js/vendor/typeahead.bundle.js')}}"></script>
+
 @endsection

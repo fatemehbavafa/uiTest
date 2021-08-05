@@ -2,13 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    private $questions;
+    public function __construct()
+    {
+        $this->questions = Question::all();
+
+    }
+
+
     public function index()
     {
-        //
+        $questions = $this->questions;
+        return view('question.index', compact('questions'));
     }
 
     /**
@@ -18,7 +28,9 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+
+        $questions = $this->questions;
+        return view('question.create', compact('questions'));
     }
 
     /**
@@ -29,7 +41,8 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $questions = Question::create($request->all());
+        return redirect(route('question.index',compact('questions')))->with('message', 'سوال ایجاد  شد  ');
     }
 
     /**
@@ -51,7 +64,9 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $questions = Question::findOrFail($id);
+
+        return view('user.edit', compact('questions'))->with('message', 'سوال با موفقیت ویرایش شد');;
     }
 
     /**
@@ -63,7 +78,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $questions = Question::findOrFail($id);
+        return redirect(route('question.index',compact('questions')))->with('message', 'سوال با موفقیت ویرایش شد');
     }
 
     /**
@@ -74,6 +90,8 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $questions = Question::findOrFail($id);
+        $questions->delete();
+        return redirect(route('question.index'))->with('message', 'سوال با موفقیت حذف شد');
     }
 }

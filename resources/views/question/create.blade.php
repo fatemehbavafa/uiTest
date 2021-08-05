@@ -10,10 +10,10 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <h1>کاربران </h1>
+            <h1>سوالات </h1>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{route('user.index')}}">فهرست</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="{{route('question.index')}}">فهرست</a></li>
                     <li class="breadcrumb-item active">جدید</li>
                 </ol>
             </nav>
@@ -24,8 +24,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    {{Form::open(array('route'=>'user.store','method' => 'POST'))}}
-                    @include('user.form')
+                    {{Form::open(array('route'=>'question.store','method' => 'POST'))}}
+                    @include('question.form')
                     {{Form::close()}}
                 </div>
             </div>

@@ -60,7 +60,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $useres = User::create($request->all());
-        return redirect(route('user.index'))->with('message', 'کاربر انجام  شد  ');
+        return redirect(route('user.index', compact('useres')))->with('message', 'کاربر ایجاد  شد  ');
     }
 
     /**
@@ -85,7 +85,7 @@ class UserController extends Controller
         $useres = User::with(['roles'])->findOrFail($id);
         $gender = $this->gender;
         $roles = $this->roles;
-        return view('user.edit', compact('useres', 'gender', 'roles'))->with('message', ';کاربر با موفقیت ویرایش شد');;
+        return view('user.edit', compact('useres', 'gender', 'roles'))->with('message', ';کاربر با موفقیت ویرایش شد');
     }
 
     /**
@@ -100,7 +100,7 @@ class UserController extends Controller
 
         $useres = User::findOrFail($id);
         $useres->update($request->all());
-        return redirect(route('user.index'))->with('message', ';کاربر با موفقیت ویرایش شد');
+        return redirect(route('user.index',compact('useres')))->with('message', 'کاربر با موفقیت ویرایش شد');
     }
 
 
