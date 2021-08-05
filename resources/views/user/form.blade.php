@@ -24,12 +24,27 @@
         <span>جنسیت</span>
     </label>
     <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
-        {{Form::select('roles[]', $roles, null, ['class' => 'form-control   select2-multiple text-right','multiple  ' ,'required' ,'id' => 'roles','dir' => 'rtl'])}}
+        {{Form::select('roles[]', $roles, null, ['class' => 'form-control   select2-multiple text-right','multiple  ' ,'required' ,'dir' => 'rtl'])}}
         <span>نقش</span>
     </label>
+    <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
+        {{Form::select('tags', $ages, null, ['class' => 'form-control text-right', 'required'])}}
+        <span>سن</span>
+    </label>
+    <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
+        {{Form::select('tags', $jobs, null, ['class' => 'form-control text-right', 'required'])}}
+        <span>شغل</span>
+    </label>
+    <label class="form-group col-sm-6 col-md-6 col-lg-6 has-float-label">
+        {{Form::select('types[]', $types, null, ['class' => 'form-control   select2-multiple text-right','multiple  ' ,'required' ,'dir' => 'rtl'])}}
+        <span>به چه نوع وبسایت هایی بیشتر علاقمندید؟</span>
+    </label>
+    <label class="form-group col-sm-6 col-md-6 col-lg-6 has-float-label">
+        {{Form::select('interests[]', $interests, null, ['class' => 'form-control   select2-multiple text-right','multiple  ' ,'required' ,'dir' => 'rtl'])}}
+        <span>به چه موضوعاتی بیشتر علاقمندید؟</span>
+    </label>
+
     <div class="w-100 text-center">
         <button class="btn btn-primary btn-sm mb-1" type="submit">ارسال</button>
     </div>
-
-
-{{Form::close()}}
+</div>

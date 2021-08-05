@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,25 @@ class UserController extends Controller
     private $useres;
     private $gender;
     private $roles;
+    private $ages;
+    private $types;
+    private $interests;
+    private $jobs;
+
+    public function __construct()
+    {
+        $this->useres = User::all();
+        $this->gender = [
+            'male' => 'مرد',
+            'female' => 'زن'
+        ];
+        $this->roles = Role::all()->pluck('title', 'id');
+        $this->ages = Tag::where('parent_id', config('env.age'))->get()->pluck('title', 'id');
+        $this->interests = Tag::where('parent_id', config('env.interest'))->get()->pluck('title', 'id');
+        $this->types = Tag::where('parent_id', config('env.type'))->get()->pluck('title', 'id');
+        $this->jobs = Tag::where('parent_id', config('env.job'))->get()->pluck('title', 'id');
+
+    }
 
     public function testers()
     {
@@ -22,16 +42,6 @@ class UserController extends Controller
 
     }
 
-    public function __construct()
-    {
-        $this->useres = User::all();
-        $this->gender = [
-            'male' => 'مرد',
-            'female' => 'زن'
-        ];
-        $this->roles = Role::all()->pluck('title', 'id');
-
-    }
 
     public function index()
     {
@@ -45,10 +55,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {    $gender = $this->gender;
+    {
+        $gender = $this->gender;
         $roles = $this->roles;
-        $useres = $this->useres;
-        return view('user.create', compact('useres','gender','roles'));
+        $jobs = $this->jobs;
+        $interests = $this->interests;
+        $types = $this->types;
+        $ages = $this->ages;
+        return view('user.create', compact('gender', 'roles', 'jobs', 'interests', 'ages', 'types'));
     }
 
     /**
@@ -59,8 +73,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $useres = User::create($request->all());
-        return redirect(route('user.index', compact('useres')))->with('message', 'کاربر ایجاد  شد  ');
+        $user = User::create($request->all());
+        $user->roles()->attach($request->roles);
+        $user->tags()->attach($request->ages, $request->types, $request->interests, $request->jobs);
+        return redirect(route('user.index'))->with('message', 'کاربر با موفقیت ایجاد شد');
     }
 
     /**
@@ -100,7 +116,7 @@ class UserController extends Controller
 
         $useres = User::findOrFail($id);
         $useres->update($request->all());
-        return redirect(route('user.index',compact('useres')))->with('message', 'کاربر با موفقیت ویرایش شد');
+        return redirect(route('user.index'))->with('message', 'کاربر با موفقیت ویرایش شد');
     }
 
 
