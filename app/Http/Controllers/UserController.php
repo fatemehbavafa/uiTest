@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     private $useres;
+    private $gender;
+    private $roles;
 
     public function testers()
     {
@@ -22,6 +25,11 @@ class UserController extends Controller
     public function __construct()
     {
         $this->useres = User::all();
+        $this->gender = [
+            'male' => 'مرد',
+            'female' => 'زن'
+        ];
+        $this->roles = Role::all()->pluck('title', 'id');
 
     }
 
@@ -37,9 +45,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {    $gender = $this->gender;
+        $roles = $this->roles;
         $useres = $this->useres;
-        return view('user.create', compact('useres'));
+        return view('user.create', compact('useres','gender','roles'));
     }
 
     /**
@@ -73,7 +82,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user= User::findOrFail($id);
+        $user = User::findOrFail($id);
         return view('user.edit', compact('user'));
     }
 
