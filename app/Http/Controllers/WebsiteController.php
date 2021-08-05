@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Website;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
-{
+{   private $websites;
+    public function __construct()
+    {
+        $this->websites = Website::all();
+
+    }
     public function index()
     {
-        //
+        $websites = $this->websites;
+        return view('website.index', compact('websites'));
     }
 
     /**
@@ -18,7 +25,8 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        //
+        $websites = $this->websites;
+        return view('website.create', compact('websites'));
     }
 
     /**
@@ -29,7 +37,9 @@ class WebsiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $websites = Website::create($request->all());
+        return redirect(route('website.index', compact('websites')))->with('message', 'سایت ایجاد  شد  ');
+
     }
 
     /**
@@ -40,7 +50,7 @@ class WebsiteController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('website.show');
     }
 
     /**
@@ -51,7 +61,9 @@ class WebsiteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $websites = Website::findOrFail($id);
+        return view('user.edit', compact('websites'))->with('message', 'سایت با موفقیت ویرایش شد');
+
     }
 
     /**
@@ -63,7 +75,9 @@ class WebsiteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $websites = Website::findOrFail($id);
+        return redirect(route('website.index',compact('websites')))->with('message', 'سایت با موفقیت ویرایش شد');
+
     }
 
     /**
@@ -74,6 +88,8 @@ class WebsiteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $websites = Website::findOrFail($id);
+        $websites->delete();
+        return redirect(route('website.index'))->with('message', 'سایت با موفقیت حذف شد');
     }
 }

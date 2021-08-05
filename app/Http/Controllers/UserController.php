@@ -45,10 +45,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {    $gender = $this->gender;
+    {
+        $gender = $this->gender;
         $roles = $this->roles;
         $useres = $this->useres;
-        return view('user.create', compact('useres','gender','roles'));
+        return view('user.create', compact('useres', 'gender', 'roles'));
     }
 
     /**
@@ -100,7 +101,7 @@ class UserController extends Controller
 
         $useres = User::findOrFail($id);
         $useres->update($request->all());
-        return redirect(route('user.index',compact('useres')))->with('message', 'کاربر با موفقیت ویرایش شد');
+        return redirect(route('user.index', compact('useres')))->with('message', 'کاربر با موفقیت ویرایش شد');
     }
 
 
