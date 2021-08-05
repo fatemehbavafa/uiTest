@@ -59,7 +59,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
+        $useres = User::create($request->all());
         return redirect(route('user.index'))->with('message', 'کاربر انجام  شد  ');
     }
 
@@ -82,8 +82,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('user.edit', compact('user'));
+        $useres = User::with(['roles'])->findOrFail($id);
+        $gender = $this->gender;
+        $roles = $this->roles;
+        return view('user.edit', compact('useres', 'gender', 'roles'))->with('message', ';کاربر با موفقیت ویرایش شد');;
     }
 
     /**
@@ -96,8 +98,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $useres = User::findOrFail($id);
+        $useres->update($request->all());
         return redirect(route('user.index'))->with('message', ';کاربر با موفقیت ویرایش شد');
     }
 
@@ -112,6 +114,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect(route('user.index'))->with('message', ';کاربر با موفقیت ویرایش شد');
+        return redirect(route('user.index'))->with('message', ';کاربر با موفقیت حذف شد');
     }
 }
