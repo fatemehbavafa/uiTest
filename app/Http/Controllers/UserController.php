@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    private $useres;
+    private $users;
     private $gender;
     private $roles;
     private $ages;
@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->useres = User::all();
+        $this->users = User::all();
         $this->gender = [
             'male' => 'مرد',
             'female' => 'زن'
@@ -45,8 +45,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $useres = $this->useres;
-        return view('user.index', compact('useres'));
+        $users = $this->users;
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -75,7 +75,10 @@ class UserController extends Controller
     {
         $user = User::create($request->all());
         $user->roles()->attach($request->roles);
-        $user->tags()->attach($request->ages, $request->types, $request->interests, $request->jobs);
+        $user->tags()->attach($request->ages);
+        $user->tags()->attach($request->interests);
+        $user->tags()->attach($request->types);
+        $user->tags()->attach($request->jobs);
         return redirect(route('user.index'))->with('message', 'کاربر با موفقیت ایجاد شد');
     }
 
@@ -98,10 +101,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $useres = User::with(['roles'])->findOrFail($id);
+        $user = User::with(['roles'])->findOrFail($id);
         $gender = $this->gender;
         $roles = $this->roles;
-        return view('user.edit', compact('useres', 'gender', 'roles'))->with('message', ';کاربر با موفقیت ویرایش شد');
+        $jobs = $this->jobs;
+        $interests = $this->interests;
+        $types = $this->types;
+        $ages = $this->ages;
+        return view('user.edit', compact('user', 'gender', 'roles', 'jobs', 'interests', 'types', 'ages'));
     }
 
     /**
@@ -114,8 +121,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 
-        $useres = User::findOrFail($id);
-        $useres->update($request->all());
+        $user = User::findOrFail($id);
+        $user->update($request->all());
         return redirect(route('user.index'))->with('message', 'کاربر با موفقیت ویرایش شد');
     }
 
@@ -130,6 +137,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect(route('user.index'))->with('message', ';کاربر با موفقیت حذف شد');
+        return redirect(route('user.index'))->with('message', 'کاربر با موفقیت حذف شد');
     }
 }
