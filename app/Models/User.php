@@ -59,5 +59,11 @@ class User extends Authenticatable
     {
         $this->belongsToMany(Test::class,'test_tester');
     }
+    public function scopeEmployers($query)
+    {
+        return $query->whereHas('roles', function ($que) {
+            $que->where('title', 'employer');
+        });
+    }
 
 }
