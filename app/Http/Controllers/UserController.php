@@ -8,9 +8,28 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    private $useres;
+    private $users;
     private $gender;
     private $roles;
+    private $ages;
+    private $types;
+    private $interests;
+    private $jobs;
+
+    public function __construct()
+    {
+        $this->users = User::all();
+        $this->gender = [
+            'male' => 'مرد',
+            'female' => 'زن'
+        ];
+        $this->roles = Role::all()->pluck('title', 'id');
+        $this->ages = Tag::where('parent_id', config('env.age'))->get()->pluck('title', 'id');
+        $this->interests = Tag::where('parent_id', config('env.interest'))->get()->pluck('title', 'id');
+        $this->types = Tag::where('parent_id', config('env.type'))->get()->pluck('title', 'id');
+        $this->jobs = Tag::where('parent_id', config('env.job'))->get()->pluck('title', 'id');
+
+    }
 
     public function testers()
     {
@@ -22,21 +41,11 @@ class UserController extends Controller
 
     }
 
-    public function __construct()
-    {
-        $this->useres = User::all();
-        $this->gender = [
-            'male' => 'مرد',
-            'female' => 'زن'
-        ];
-        $this->roles = Role::all()->pluck('title', 'id');
-
-    }
 
     public function index()
     {
-        $useres = $this->useres;
-        return view('user.index', compact('useres'));
+        $users = $this->users;
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -48,8 +57,11 @@ class UserController extends Controller
     {
         $gender = $this->gender;
         $roles = $this->roles;
-        $useres = $this->useres;
-        return view('user.create', compact('useres', 'gender', 'roles'));
+        $jobs = $this->jobs;
+        $interests = $this->interests;
+        $types = $this->types;
+        $ages = $this->ages;
+        return view('user.create', compact('gender', 'roles', 'jobs', 'interests', 'ages', 'types'));
     }
 
     /**
@@ -60,8 +72,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $useres = User::create($request->all());
-        return redirect(route('user.index', compact('useres')))->with('message', 'کاربر ایجاد  شد  ');
+        $user = User::create($request->all());
+        $user->roles()->attach($request->roles);
+        $user->tags()->attach($request->ages);
+        $user->tags()->attach($request->interests);
+        $user->tags()->attach($request->types);
+        $user->tags()->attach($request->jobs);
+        return redirect(route('user.index'))->with('message', 'کاربر با موفقیت ایجاد شد');
     }
 
     /**
@@ -83,10 +100,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $useres = User::with(['roles'])->findOrFail($id);
+        $user = User::with(['roles'])->findOrFail($id);
         $gender = $this->gender;
         $roles = $this->roles;
-        return view('user.edit', compact('useres', 'gender', 'roles'))->with('message', ';کاربر با موفقیت ویرایش شد');
+        $jobs = $this->jobs;
+        $interests = $this->interests;
+        $types = $this->types;
+        $ages = $this->ages;
+        return view('user.edit', compact('user', 'gender', 'roles', 'jobs', 'interests', 'types', 'ages'));
     }
 
     /**
@@ -99,9 +120,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 
-        $useres = User::findOrFail($id);
-        $useres->update($request->all());
-        return redirect(route('user.index', compact('useres')))->with('message', 'کاربر با موفقیت ویرایش شد');
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return redirect(route('user.index'))->with('message', 'کاربر با موفقیت ویرایش شد');
     }
 
 
@@ -115,6 +136,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect(route('user.index'))->with('message', ';کاربر با موفقیت حذف شد');
+        return redirect(route('user.index'))->with('message', 'کاربر با موفقیت حذف شد');
     }
 }
