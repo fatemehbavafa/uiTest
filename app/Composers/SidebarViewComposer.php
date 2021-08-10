@@ -2,6 +2,7 @@
 
 namespace App\Composers;
 
+
 class SidebarViewComposer
 {
     public function compose($view)

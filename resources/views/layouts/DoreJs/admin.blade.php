@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>سامانه باربری بارآن</title>
+    <title>ui-test</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('DoreJs/img/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('DoreJs/img/favicon-32x32.png')}}">
@@ -39,7 +39,7 @@
 </head>
 <body id="app-container" class="menu-default">
 <div id="app"></div>
-@include('layouts.DoreJs.navbar')
+{{--@include('layouts.DoreJs.navbar')--}}
 @include('layouts.DoreJs.sidebar')
 <main>
     <div class="container-fluid">
