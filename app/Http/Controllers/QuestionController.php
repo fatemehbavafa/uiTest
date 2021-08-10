@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
     private $questions;
     private $types;
-    private $interests;
+
 
 
     public function __construct()
     {
         $this->questions = Question::all();
-
+        $this->types = Tag::where('parent_id', config('env.type'))->get()->pluck('title', 'id');
 
     }
 
@@ -34,9 +35,9 @@ class QuestionController extends Controller
     public function create()
     {
 
-        $interests = $this->interests;
+        $questions = $this->questions;
         $types = $this->types;
-        return view('question.create', compact(  'interests',  'types'));
+        return view('question.create', compact(    'types','questions'));
 
     }
 
@@ -50,6 +51,7 @@ class QuestionController extends Controller
     {
 
         $questions = Question::create($request->all());
+        $questions->tags()->attach($request->types);
         return redirect(route('question.index', compact('questions')))->with('message', 'سوال ایجاد  شد  ');
     }
 
@@ -73,9 +75,8 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question= Question::findOrFail($id);
-        $interests = $this->interests;
         $types = $this->types;
-        return view('question.edit', compact('question',  'interests', 'types'))->with('message', 'سوال با موفقیت ویرایش شد');;
+        return view('question.edit', compact('question', 'types'))->with('message', 'سوال با موفقیت ویرایش شد');;
     }
 
     /**

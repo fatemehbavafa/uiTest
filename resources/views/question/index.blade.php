@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <h1>فهرست سوالات  </h1>
+            <h1>فهرست سوال ها </h1>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item active">فهرست</li>
@@ -29,9 +29,8 @@
                     <table id="dataTable" class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th style="white-space: pre">  شرح سوال </th>
+                            <th style="white-space: pre"> صورت سوال </th>
                             <th style="white-space: pre"> قیمت  </th>
-                            <th style="white-space: pre" >   عملیات </th>
                         </tr>
                         </thead>
                         <tbody>

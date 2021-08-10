@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <h1>سوالات </h1>
+            <h1>سوال ها</h1>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item" aria-current="page"><a href="{{route('question.index')}}">فهرست</a></li>
