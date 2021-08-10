@@ -86,13 +86,16 @@ class WebsiteController extends Controller
      */
     public function edit($id)
     {
+
+
+
         $website= Website::findOrFail($id);
-        $employer = User::findOrFail($id);
         $jobs = $this->jobs;
         $interests = $this->interests;
         $types = $this->types;
         $ages = $this->ages;
-        return view('user.edit', compact('website','employer','jobs', 'interests', 'types', 'ages'))->with('message', 'سایت با موفقیت ویرایش شد');
+
+        return view('website.edit', compact('website','jobs', 'interests', 'types', 'ages'))->with('message', 'سایت با موفقیت ویرایش شد');
 
     }
 
@@ -107,7 +110,7 @@ class WebsiteController extends Controller
     {
         $website= Website::findOrFail($id);
         $website->update($request->all());
-        return redirect(route('website.index', compact('websites')))->with('message', 'سایت با موفقیت ویرایش شد');
+        return redirect(route('website.index', compact('website')))->with('message', 'سایت با موفقیت ویرایش شد');
 
     }
 

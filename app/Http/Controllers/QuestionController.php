@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
     private $questions;
+    private $types;
+    private $interests;
+
+
     public function __construct()
     {
         $this->questions = Question::all();
+
 
     }
 
@@ -29,63 +34,68 @@ class QuestionController extends Controller
     public function create()
     {
 
-        $questions = $this->questions;
-        return view('question.create', compact('questions'));
+        $interests = $this->interests;
+        $types = $this->types;
+        return view('question.create', compact(  'interests',  'types'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+
         $questions = Question::create($request->all());
-        return redirect(route('question.index',compact('questions')))->with('message', 'سوال ایجاد  شد  ');
+        return redirect(route('question.index', compact('questions')))->with('message', 'سوال ایجاد  شد  ');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        return view('question.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $questions = Question::findOrFail($id);
-
-        return view('user.edit', compact('questions'))->with('message', 'سوال با موفقیت ویرایش شد');;
+        $question= Question::findOrFail($id);
+        $interests = $this->interests;
+        $types = $this->types;
+        return view('question.edit', compact('question',  'interests', 'types'))->with('message', 'سوال با موفقیت ویرایش شد');;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $questions = Question::findOrFail($id);
-        return redirect(route('question.index',compact('questions')))->with('message', 'سوال با موفقیت ویرایش شد');
+        $questions->update($request->all());
+        return redirect(route('question.index', compact('questions')))->with('message', 'سوال با موفقیت ویرایش شد');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

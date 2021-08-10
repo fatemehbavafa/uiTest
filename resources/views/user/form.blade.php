@@ -1,3 +1,4 @@
+
 <div class="row">
     <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
         {{Form::text('first_name', null, ['class' => 'form-control text-right', 'required'])}}
@@ -12,7 +13,7 @@
         <span> نام کاربری</span>
     </label>
     <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
-        {{Form::text('password', null, ['class' => 'form-control text-left d-ltr', 'id'=>'password', 'required'])}}
+        {{Form::number('password', null, ['class' => 'form-control text-left d-ltr', 'id'=>'password', 'required'])}}
         <span> رمز عبور</span>
     </label>
     <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
@@ -20,7 +21,7 @@
         <span>ایمیل </span>
     </label>
     <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
-        {{Form::text('phone', null, ['class' => 'form-control text-left d-ltr', 'id'=>'phone','required'])}}
+        {{Form::number('phone', null, ['class' => 'form-control text-left d-ltr', 'id'=>'phone','required'])}}
         <span>تلفن </span>
     </label>
     <label class="form-group col-sm-6 col-md-4 col-lg-4 has-float-label">
@@ -52,3 +53,4 @@
         <button class="btn btn-primary btn-sm mb-1" type="submit">ارسال</button>
     </div>
 </div>
+{{Form::close()}}
