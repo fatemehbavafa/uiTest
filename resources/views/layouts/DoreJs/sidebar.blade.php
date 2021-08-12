@@ -6,8 +6,7 @@
                     <a href="#user">
                         <i class="flaticon-user"></i>
                         <span>کاربران</span>
-                    </a>
-                </li>
+                    </a></li>
                 <li @if($menu=='website')class="active"@endif>
                     <a href="#website">
                         <i class="flaticon-web"></i> وبسایت
